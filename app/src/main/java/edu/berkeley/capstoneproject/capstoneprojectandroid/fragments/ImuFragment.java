@@ -8,9 +8,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -50,11 +52,14 @@ public class ImuFragment extends Feather52Fragment {
     private final Feather52 mFeather52 = CapstoneProjectAndroidApplication.getInstance().getFeather52();
     private IMU mImu;
 
+    private float gyr1;
+    private float gyr2;
 
     private View mView;
     private LineChart mAccView;
     private LineChart mGyrView;
     private LineChart mEncoderView;
+    private TextView mDegText;
 
     private int[] mColors = new int[] {
             ColorTemplate.COLORFUL_COLORS[0],
@@ -73,11 +78,12 @@ public class ImuFragment extends Feather52Fragment {
 
         mAccView = (LineChart) mView.findViewById(R.id.fragment_imu_linechart_acc);
         mGyrView = (LineChart) mView.findViewById(R.id.fragment_imu_linechart_gyr);
-        mEncoderView = (LineChart) mView.findViewById(R.id.fragment_imu_linechart_encoder);
+        mDegText = (TextView) mView.findViewById(R.id.fragment_degree);
+//        mEncoderView = (LineChart) mView.findViewById(R.id.fragment_imu_linechart_encoder);
 
         initLineChart(mAccView);
         initLineChart(mGyrView);
-        initLineChart(mEncoderView);
+//        initLineChart(mEncoderView);
 
         return mView;
     }
@@ -119,7 +125,7 @@ public class ImuFragment extends Feather52Fragment {
     public void clearUi() {
         clearLineChart(mAccView);
         clearLineChart(mGyrView);
-        clearLineChart(mEncoderView);
+//        clearLineChart(mEncoderView);
     }
 
 
@@ -134,9 +140,17 @@ public class ImuFragment extends Feather52Fragment {
                 String label = intent.getStringExtra(EXTRA_LABEL);
                 long tookAt = intent.getLongExtra(EXTRA_TOOK_AT, 0);
                 float value = intent.getFloatExtra(EXTRA_VALUE, 0);
-
+                Log.d("Receive Data", label + " " + value);
                 addDataEntry(label, new Entry(tookAt, value));
+
+                if (label.equals(IMU.LABEL_IMU_ACC_Z))
+                    gyr1 = value;
+                if (label.equals(IMU.LABEL_IMU_GYR_Z))
+                    gyr2 = value;
+
+                mDegText.setText(String.valueOf(calBendDegree(gyr1, gyr2)));
             }
+
         }
     };
 
@@ -150,7 +164,7 @@ public class ImuFragment extends Feather52Fragment {
             lineChart = mGyrView;
         }
         else if (label.equals(Encoder.LABEL_ENCODER_ANGLE)) {
-            lineChart = mEncoderView;
+//            lineChart = mEncoderView;
         }
 
         if (lineChart == null) {
@@ -179,6 +193,7 @@ public class ImuFragment extends Feather52Fragment {
 
     }
 
+
     private void initLineChart(LineChart lineChart) {
         LineData data = new LineData();
         data.setValueTextColor(Color.WHITE);
@@ -194,7 +209,7 @@ public class ImuFragment extends Feather52Fragment {
         YAxis leftAxis = lineChart.getAxisLeft();
         //leftAxis.setTypeface(mTfLight);
         leftAxis.setAxisMinimum(0f);
-        leftAxis.setAxisMaximum(65000f);
+        leftAxis.setAxisMaximum(100f);
         leftAxis.setTextColor(Color.WHITE);
         leftAxis.setDrawGridLines(false);
         leftAxis.setDrawGridLines(true);
@@ -216,4 +231,14 @@ public class ImuFragment extends Feather52Fragment {
 
         return filter;
     }
+
+    private float calBendDegree(float gyr1, float gyr2) {
+        float angle1 = gyr1 > 0 ? gyr1 : 360 + gyr1;
+        float angle2 = 180 - gyr2;
+
+        float angle =  (angle1 > 180) ? (angle1 - angle2) : (angle1 - angle2 + 360);
+        Log.d("Degree", String.valueOf(angle));
+        return angle;
+    }
+
 }

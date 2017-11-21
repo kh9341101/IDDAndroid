@@ -55,17 +55,17 @@ public class IMU extends Sensor {
 
         switch(type) {
             case IMU_DATA_ACC:
-                float accX = BytesUtils.bytesToInt16(bytes, offset + 0 * BytesUtils.BYTES_FLOAT);
-                float accY = BytesUtils.bytesToInt16(bytes, offset + 1 * BytesUtils.BYTES_FLOAT);
-                float accZ = BytesUtils.bytesToInt16(bytes, offset + 2 * BytesUtils.BYTES_FLOAT);
+                float accX = BytesUtils.bytesToFloat(bytes, offset + 0 * BytesUtils.BYTES_FLOAT);
+                float accY = BytesUtils.bytesToFloat(bytes, offset + 1 * BytesUtils.BYTES_FLOAT);
+                float accZ = BytesUtils.bytesToFloat(bytes, offset + 2 * BytesUtils.BYTES_FLOAT);
                 measurements.put(LABEL_IMU_ACC_X, new Measurement<Float>(took_at, accX));
                 measurements.put(LABEL_IMU_ACC_Y, new Measurement<Float>(took_at, accY));
                 measurements.put(LABEL_IMU_ACC_Z, new Measurement<Float>(took_at, accZ));
                 break;
             case IMU_DATA_GYR:
-                float gyrX = BytesUtils.bytesToInt16(bytes, offset + 0 * BytesUtils.BYTES_FLOAT);
-                float gyrY = BytesUtils.bytesToInt16(bytes, offset + 1 * BytesUtils.BYTES_FLOAT);
-                float gyrZ = BytesUtils.bytesToInt16(bytes, offset + 2 * BytesUtils.BYTES_FLOAT);
+                float gyrX = BytesUtils.bytesToFloat(bytes, offset + 0 * BytesUtils.BYTES_FLOAT);
+                float gyrY = BytesUtils.bytesToFloat(bytes, offset + 1 * BytesUtils.BYTES_FLOAT);
+                float gyrZ = BytesUtils.bytesToFloat(bytes, offset + 2 * BytesUtils.BYTES_FLOAT);
                 measurements.put(LABEL_IMU_GYR_X, new Measurement<Float>(took_at, gyrX));
                 measurements.put(LABEL_IMU_GYR_Y, new Measurement<Float>(took_at, gyrY));
                 measurements.put(LABEL_IMU_GYR_Z, new Measurement<Float>(took_at, gyrZ));

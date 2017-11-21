@@ -419,13 +419,13 @@ public class Feather52Service extends Service {
                 e.addMeasurements(meas);
                 return meas;
             }
-            else if (characteristic.getUuid().equals(UUID_CHARACTERISTIC_ENCODER)) {
-                Encoder encoder = mFeather52.getEncoder();
-                Map<String, Measurement> meas = Encoder.decodeMeasurement(bytes);
-                Exercise e = mFeather52.getCurrentExercise();
-                e.addMeasurements(meas);
-                return meas;
-            }
+//            else if (characteristic.getUuid().equals(UUID_CHARACTERISTIC_ENCODER)) {
+//                Encoder encoder = mFeather52.getEncoder();
+//                Map<String, Measurement> meas = Encoder.decodeMeasurement(bytes);
+//                Exercise e = mFeather52.getCurrentExercise();
+//                e.addMeasurements(meas);
+//                return meas;
+//            }
         }
 
         return null;

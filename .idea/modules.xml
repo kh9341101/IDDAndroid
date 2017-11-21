@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CapstoneProjectAndroid.iml" filepath="$PROJECT_DIR$/CapstoneProjectAndroid.iml" />
+      <!--<module fileurl="file://$PROJECT_DIR$/CapstoneProjectAndroid.iml" filepath="$PROJECT_DIR$/CapstoneProjectAndroid.iml" />-->
+      <module fileurl="file://$PROJECT_DIR$/IDDAndroid.iml" filepath="$PROJECT_DIR$/IDDAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

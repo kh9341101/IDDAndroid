@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 /**
  * Created by Alex on 26/10/2017.
@@ -32,7 +33,7 @@ public class BytesUtils {
     public static float bytesToFloat(byte[] bytes) { return bytesToFloat(bytes, 0); }
 
     public static float bytesToFloat(byte[] bytes, int offset) {
-        ByteBuffer buffer = ByteBuffer.wrap(bytes, offset, BYTES_FLOAT);
+        ByteBuffer buffer = ByteBuffer.wrap(bytes, offset, BYTES_FLOAT).order(ByteOrder.LITTLE_ENDIAN);
         try {
             return buffer.getFloat();
         }
