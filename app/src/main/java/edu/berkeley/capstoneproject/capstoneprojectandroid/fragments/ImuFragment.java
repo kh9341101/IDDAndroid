@@ -148,7 +148,7 @@ public class ImuFragment extends Feather52Fragment {
                 if (label.equals(IMU.LABEL_IMU_GYR_Z))
                     gyr2 = value;
 
-                mDegText.setText(String.valueOf(calBendDegree(gyr1, gyr2)));
+                mDegText.setText("Knee Degree : "+String.valueOf(calBendDegree(gyr1, gyr2)));
             }
 
         }
