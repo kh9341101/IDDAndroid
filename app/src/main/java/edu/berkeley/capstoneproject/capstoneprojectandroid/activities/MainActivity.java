@@ -219,10 +219,6 @@ public class MainActivity extends Activity {
         mPairedDevicesAdapter = new BluetoothDeviceAdapter(this, R.layout.bluetooth_device, new ArrayList<BluetoothDevice>());
         mScannedDevicesAdapter = new BluetoothDeviceAdapter(this, R.layout.bluetooth_device, new ArrayList<BluetoothDevice>());
 
-        mPairedListView = (ListView) findViewById(R.id.list_bluetooth_paired_devices);
-        mPairedListView.setAdapter(mPairedDevicesAdapter);
-        mPairedListView.setOnItemClickListener(mDeviceClickListener);
-
         mScannedListView = (ListView) findViewById(R.id.list_bluetooth_scanned_devices);
         mScannedListView.setAdapter(mScannedDevicesAdapter);
         mScannedListView.setOnItemClickListener(mDeviceClickListener);
@@ -428,6 +424,8 @@ public class MainActivity extends Activity {
             if (mBtAdapter != null) {
                 mBtAdapter.cancelDiscovery();
             }
+            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+            startActivity(intent);
             finish();
         }
         return super.onKeyDown(keyCode, event);
@@ -442,5 +440,10 @@ public class MainActivity extends Activity {
         //this.unregisterReceiver(mReceiver);
 
         super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }

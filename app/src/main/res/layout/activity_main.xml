@@ -14,43 +14,31 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/text_bluetooth_paired_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Paired devices"/>
-
-        <ListView
-            android:id="@+id/list_bluetooth_paired_devices"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </ListView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <TextView
             android:id="@+id/text_bluetooth_scanned_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Scanned devices"/>
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:fontFamily="casual"
+            android:text="Connect Your Device"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/button_bluetooth_scan"
-            android:layout_width="wrap_content"
+            style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:elevation="1dp"
+            android:fontFamily="cursive"
             android:gravity="center"
-            android:text="Scan"/>
+            android:text="Scan" />
 
         <ListView
             android:id="@+id/list_bluetooth_scanned_devices"
+            style="@style/Widget.AppCompat.ListView.Menu"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </ListView>
+            android:layout_height="match_parent"></ListView>
 
     </LinearLayout>
 

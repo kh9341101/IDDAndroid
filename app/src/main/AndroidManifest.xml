@@ -20,7 +20,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,19 +27,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".activities.SignupActivity"/>
-        <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.SignupActivity" />
+        <activity
+            android:name=".activities.MainActivity"
+            android:parentActivityName=".activities.ProfileActivity" />
         <activity android:name=".activities.DeviceActivity" />
         <activity android:name=".activities.DeviceLeActivity" />
         <activity android:name=".activities.Feather52Activity" />
         <activity android:name=".fragments.ImuFragment" />
-        <activity android:name=".activities.EncoderActivity" />
         <activity android:name=".activities.MyServiceActivity" />
 
         <service android:name=".services.BluetoothLeService" />
         <service android:name=".services.Feather52Service" />
 
+        <activity android:name=".activities.ProfileActivity"></activity>
     </application>
 
 </manifest>
