@@ -1,14 +1,18 @@
 package edu.berkeley.capstoneproject.capstoneprojectandroid;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import android.content.Context;
+import android.content.Intent;
 
 
+import edu.berkeley.capstoneproject.capstoneprojectandroid.activities.ProfileActivity;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.models.Patient;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.adapters.PatientAdapter;
 
@@ -21,11 +25,12 @@ public class PatientHolder extends RecyclerView.ViewHolder {
     private TextView mDescView;
     private ImageView mThumbnailView;
     private TextView mSummaryView;
-    private static PatientAdapter.onPatientSelectedListener mListener;
+//    private static PatientAdapter.onPatientSelectedListener mListener;
 
     public static PatientHolder newInstance(ViewGroup container, PatientAdapter.onPatientSelectedListener Listener) {
+
         View root = LayoutInflater.from(container.getContext()).inflate(R.layout.layout_news_card, container, false);
-        mListener = Listener;
+//        mListener = Listener;
         return new PatientHolder(root);
     }
 
@@ -35,12 +40,16 @@ public class PatientHolder extends RecyclerView.ViewHolder {
         mDescView = (TextView) itemView.findViewById(R.id.card_subtitle);
         mSummaryView = (TextView) itemView.findViewById(R.id.card_summary);
         mThumbnailView = (ImageView) itemView.findViewById(R.id.card_image);
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mListener.onPatientSelected(view, getAdapterPosition());
-            }
-        });
+//        itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.i("OnClick", String.valueOf(getAdapterPosition()));
+//                Context context = view.getContext();
+//                Intent intent = new Intent(context, ProfileActivity.class);
+//                context.startActivity(intent);
+//                mListener.onPatientSelected(view, getAdapterPosition());
+//            }
+//        });
 
     }
 

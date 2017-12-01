@@ -14,7 +14,7 @@ import butterknife.BindView;
 public class ProfileActivity extends AppCompatActivity {
 
     @BindView(R.id.viewexercise) Button _mexercise;
-
+    @BindView(R.id.viewresult) Button _mresult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,16 @@ public class ProfileActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        _mresult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, ResultActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         super.onCreate(savedInstanceState);
     }
 

@@ -41,7 +41,9 @@
         <service android:name=".services.Feather52Service" />
 
         <activity android:name=".activities.ProfileActivity" />
-        <activity android:name=".activities.PatientListActivity"></activity>
+        <activity android:name=".activities.PatientListActivity" />
+        <activity android:name=".activities.ResultActivity" />
+
     </application>
 
 </manifest>

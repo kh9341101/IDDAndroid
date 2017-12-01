@@ -40,13 +40,15 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientHolder> {
         mCards = cards;
     }
 
-    public void setOnItemSelectedListener(onPatientSelectedListener listener) {
+
+    public void setOnPatientSelectedListener(onPatientSelectedListener listener) {
         mListener = listener;
     }
 
     public interface onPatientSelectedListener {
         public void onPatientSelected(View v, int position);
     }
+
 
 //    public void setType(int type) {
 //        this.mType = type;

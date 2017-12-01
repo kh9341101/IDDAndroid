@@ -12,7 +12,7 @@ import android.view.View;
 import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
 
 import edu.berkeley.capstoneproject.capstoneprojectandroid.R;
-import edu.berkeley.capstoneproject.capstoneprojectandroid.adapters.Feather52DrawerAdapter;
+import edu.berkeley.capstoneproject.capstoneprojectandroid.listeners.RecyclerItemClickListener;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.adapters.PatientAdapter;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.models.Patient;
 
@@ -43,13 +43,29 @@ public class PatientListActivity extends AppCompatActivity {
         shimmerRecycler.setLayoutManager(layoutManager);
         shimmerRecycler.setAdapter(mAdapter);
         shimmerRecycler.showShimmerAdapter();
+        shimmerRecycler.addOnItemTouchListener(
+                new RecyclerItemClickListener(this, shimmerRecycler ,new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+                        // do whatever
+                        Log.i("Patient Selected", String.valueOf(position));
+                        Intent intent = new Intent(view.getContext(), ProfileActivity.class);
+                        startActivity(intent);
+                    }
 
-        mAdapter.setOnItemSelectedListener(new PatientAdapter.onPatientSelectedListener() {
-            @Override
-            public void onPatientSelected(View v, int position) {
-                Log.i("Patient Selected", String.valueOf(position));
-            }
-        });
+                    @Override public void onLongItemClick(View view, int position) {
+                        // do whatever
+                    }
+                })
+        );
+//        mAdapter.setOnPatientSelectedListener(new PatientAdapter.onPatientSelectedListener() {
+//            @Override
+//            public void onPatientSelected(View v, int position) {
+//                Log.i("Patient Selected", String.valueOf(position));
+//                Intent intent = new Intent(this, ProfileActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
 
         shimmerRecycler.postDelayed(new Runnable() {
             @Override

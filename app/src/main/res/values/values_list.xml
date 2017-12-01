@@ -22,8 +22,7 @@ limitations under the License.
     <string name="ab_list_title1">Patient List</string>
     <color name="colorPrimary">#455a64</color>
     <color name="colorPrimaryDark">#374850</color>
-    <color name="colorAccent">#FF4081</color>
-
+    <color name="colorAccent">#eaa502</color>
     <color name="textPrimary">#212121</color>
     <color name="textSecondary">#8b8b8b</color>
 
