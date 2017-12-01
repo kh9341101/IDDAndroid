@@ -15,6 +15,7 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.BindView;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.R;
+import edu.berkeley.capstoneproject.capstoneprojectandroid.models.Patient;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -107,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
-        Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+        Intent intent = new Intent(LoginActivity.this, PatientListActivity.class);
         startActivity(intent);
         finish();
     }

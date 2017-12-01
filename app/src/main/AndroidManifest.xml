@@ -40,7 +40,8 @@
         <service android:name=".services.BluetoothLeService" />
         <service android:name=".services.Feather52Service" />
 
-        <activity android:name=".activities.ProfileActivity"></activity>
+        <activity android:name=".activities.ProfileActivity" />
+        <activity android:name=".activities.PatientListActivity"></activity>
     </application>
 
 </manifest>
