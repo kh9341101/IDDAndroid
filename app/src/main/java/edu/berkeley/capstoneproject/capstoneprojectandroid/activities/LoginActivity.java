@@ -15,11 +15,15 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.BindView;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.R;
-import edu.berkeley.capstoneproject.capstoneprojectandroid.models.Patient;
+import static edu.berkeley.capstoneproject.capstoneprojectandroid.activities.ProfileActivity.loginActivity;
+import static edu.berkeley.capstoneproject.capstoneprojectandroid.activities.ProfileActivity.patientListActivity;
+import static edu.berkeley.capstoneproject.capstoneprojectandroid.activities.ProfileActivity.previousActivity;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
+
+    private int userType = 0;
 
     @BindView(R.id.input_email) EditText _emailText;
     @BindView(R.id.input_password) EditText _passwordText;
@@ -62,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
+
         _loginButton.setEnabled(false);
 
 //        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
@@ -74,6 +79,15 @@ public class LoginActivity extends AppCompatActivity {
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
+        if (email.equals("admin") && password.equals("admin")) {
+            userType = 0;
+        }
+        if (email.equals("padmin") && password.equals("padmin")) {
+            userType = 1;
+        }
+
+
+
         // TODO: Implement your own authentication logic here.
 
         new android.os.Handler().postDelayed(
@@ -84,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                         // onLoginFailed();
                         progressDialog.dismiss();
                     }
-                }, 3000);
+                }, 1000);
     }
 
 
@@ -108,9 +122,17 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
-        Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
-        startActivity(intent);
-        finish();
+        if (userType == 0) {
+            Intent intent = new Intent(LoginActivity.this, PatientListActivity.class);
+            intent.putExtra(previousActivity, loginActivity);
+            startActivity(intent);
+            finish();
+        } else if (userType == 1) {
+            Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+            intent.putExtra(previousActivity, loginActivity);
+            startActivity(intent);
+            finish();
+        }
     }
 
     public void onLoginFailed() {
@@ -126,6 +148,9 @@ public class LoginActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString();
 
         if (email.equals("admin") && password.equals("admin")) {
+            return valid;
+        }
+        if (email.equals("padmin") && password.equals("padmin")) {
             return valid;
         }
 

@@ -4,6 +4,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.berkeley.capstoneproject.capstoneprojectandroid.PatientHolder;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.models.Patient;
 
@@ -13,7 +16,7 @@ import edu.berkeley.capstoneproject.capstoneprojectandroid.models.Patient;
  */
 
 public class PatientAdapter extends RecyclerView.Adapter<PatientHolder> {
-    private Patient[] mCards = new Patient[0];
+    private ArrayList<Patient> mPatients = new ArrayList<Patient>();
     private onPatientSelectedListener mListener;
 
     @Override
@@ -24,20 +27,20 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientHolder> {
     @Override
     public void onBindViewHolder(PatientHolder holder, int position) {
 
-        holder.bind(mCards[position]);
+        holder.bind(mPatients.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mCards.length;
+        return mPatients.size();
     }
 
-    public void setCards(Patient[] cards) {
+    public void setCards(ArrayList<Patient> patients) {
 
-        if (cards == null) {
-            mCards = new Patient[0];
+        if (patients == null) {
+            mPatients = new ArrayList<Patient>();
         }
-        mCards = cards;
+        mPatients = patients;
     }
 
 
@@ -49,6 +52,9 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientHolder> {
         public void onPatientSelected(View v, int position);
     }
 
+    public Patient getItemAtPostition(int position) {
+        return mPatients.get(position);
+    }
 
 //    public void setType(int type) {
 //        this.mType = type;

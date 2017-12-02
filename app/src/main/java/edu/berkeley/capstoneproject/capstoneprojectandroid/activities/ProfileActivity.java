@@ -13,6 +13,12 @@ import butterknife.BindView;
 
 public class ProfileActivity extends AppCompatActivity {
 
+    public static final String previousActivity = "previousActivity";
+    public static final int loginActivity = 1;
+    public static final int patientListActivity = 2;
+
+    private int previousActivityType;
+
     @BindView(R.id.viewexercise) Button _mexercise;
     @BindView(R.id.viewresult) Button _mresult;
 
@@ -21,7 +27,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_patient_profile);
         ButterKnife.bind(this);
 
-
+        previousActivityType = getIntent().getIntExtra(previousActivity, -1);
 
         _mexercise.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,8 +52,13 @@ public class ProfileActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
-        startActivity(intent);
+        if (previousActivityType == patientListActivity) {
+            Intent intent = new Intent(ProfileActivity.this, PatientListActivity.class);
+            startActivity(intent);
+        } else if (previousActivityType == loginActivity) {
+            Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
         super.onBackPressed();
     }
 }
