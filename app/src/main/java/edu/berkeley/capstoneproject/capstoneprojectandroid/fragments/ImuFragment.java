@@ -237,7 +237,7 @@ public class ImuFragment extends Feather52Fragment {
 //        float angle2 = 180 - gyr2;
         float angle2 = gyr2 > 0 ? 360-gyr2 : - gyr2;
 
-        float angle =  (angle2 > 180) ? (angle2 - angle1) : (angle2 - angle1 + 360);
+        float angle =  (angle2 > 180) ? 180-(angle2 - angle1) : 180-(angle2 - angle1 + 360);
         Log.d("Degree", String.valueOf(angle));
         return angle%360;
     }
