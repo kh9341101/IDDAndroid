@@ -42,7 +42,7 @@ public class ResultActivity extends AppCompatActivity {
             @Override
             public void run() {
                 // TODO Auto-generated method stub
-                while (pStatus < 100) {
+                while (pStatus < 79.46) {
                     pStatus += 1;
 
                     handler.post(new Runnable() {
