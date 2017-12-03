@@ -21,6 +21,7 @@ import edu.berkeley.capstoneproject.capstoneprojectandroid.adapters.PatientAdapt
  */
 
 public class PatientHolder extends RecyclerView.ViewHolder {
+    private static int muid;
     private TextView mTitleView;
     private TextView mDescView;
     private ImageView mThumbnailView;
@@ -36,10 +37,10 @@ public class PatientHolder extends RecyclerView.ViewHolder {
 
     private PatientHolder(View itemView) {
         super(itemView);
-        mTitleView = (TextView) itemView.findViewById(R.id.card_title);
-        mDescView = (TextView) itemView.findViewById(R.id.card_subtitle);
-        mSummaryView = (TextView) itemView.findViewById(R.id.card_summary);
-        mThumbnailView = (ImageView) itemView.findViewById(R.id.card_image);
+        mTitleView = itemView.findViewById(R.id.card_title);
+        mDescView = itemView.findViewById(R.id.card_subtitle);
+        mSummaryView = itemView.findViewById(R.id.card_summary);
+        mThumbnailView = itemView.findViewById(R.id.card_image);
 //        itemView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -62,6 +63,13 @@ public class PatientHolder extends RecyclerView.ViewHolder {
         Glide.with(itemView.getContext()).load(card.getThumbnailUrl()).into(mThumbnailView);
     }
 
+    public static int getUid() {
+        return PatientHolder.muid;
+    }
+
+    public static void setUid(int uid) {
+        PatientHolder.muid = uid;
+    }
 
 //    private static int getLayoutResourceId(int type) {
 //        int selectedLayoutResource;

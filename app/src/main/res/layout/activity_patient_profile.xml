@@ -28,7 +28,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
 
-                android:id="@+id/profile"
+                android:id="@+id/profile_image"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
 
@@ -67,7 +67,7 @@
                     android:src="@android:drawable/ic_menu_edit" android:contentDescription="TODO"/>
 
                 <TextView
-                    android:id="@+id/name"
+                    android:id="@+id/patient_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -81,7 +81,7 @@
                     android:id="@+id/designation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/name"
+                    android:layout_below="@+id/patient_name"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
                     android:text="(Adhyaksh)"
@@ -90,15 +90,15 @@
             </RelativeLayout>
 
 
-            <android.support.constraint.ConstraintLayout
+            <!--<android.support.constraint.ConstraintLayout-->
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/profile_layout"
-                android:background="#fff"
+                android:background="#ffffff"
                 android:elevation="4dp"
                 android:minHeight="63dp"
                 android:orientation="vertical"
-
                 android:paddingBottom="20dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
@@ -109,13 +109,13 @@
                     style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="48dp"
-                    android:layout_marginEnd="53dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginEnd="14dp"
+                    android:layout_marginTop="10dp"
                     android:text="ViewResult"
-                    app:layout_constraintBottom_toTopOf="@+id/viewexercise"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    tools:layout_editor_absoluteX="234dp"
+                    tools:layout_editor_absoluteY="16dp" />
 
 
                 <Button
@@ -123,13 +123,41 @@
                     style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="36dp"
-                    android:layout_marginEnd="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignStart="@+id/viewresult"
+                    android:layout_marginBottom="22dp"
                     android:text="Exercise"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/viewresult"
-                    app:layout_constraintVertical_bias="1.0" />
+                    tools:layout_editor_absoluteX="234dp"
+                    tools:layout_editor_absoluteY="98dp" />
+
+                <TextView
+                    android:id="@+id/patient_description"
+                    android:layout_width="210dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/patient_summary"
+                    android:layout_alignTop="@+id/viewresult"
+                    android:fontFamily="@font/aladin"
+                    android:lineSpacingExtra="12sp"
+                    android:text="Description"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="53dp" />
+
+                <TextView
+                    android:id="@+id/patient_summary"
+                    android:layout_width="210dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignTop="@+id/viewexercise"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/aladin"
+                    android:lineSpacingExtra="10sp"
+                    android:text="Summary:"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="18sp"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="104dp" />
 
                 <!--<TextView-->
                 <!--android:id="@+id/textView5"-->
@@ -351,8 +379,8 @@
                 <!--android:text="B.Tech"-->
                 <!--app:layout_constraintLeft_toRightOf="@+id/textView5"-->
                 <!--app:layout_constraintTop_toBottomOf="@+id/textView10" />-->
-
-            </android.support.constraint.ConstraintLayout>
+            </RelativeLayout>
+            <!--</android.support.constraint.ConstraintLayout>-->
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

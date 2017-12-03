@@ -1,5 +1,6 @@
 package edu.berkeley.capstoneproject.capstoneprojectandroid.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.res.Resources;
@@ -24,7 +25,7 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
         Resources res = getResources();
         Drawable drawable = res.getDrawable(R.drawable.circular);
-        final ProgressBar mProgress = (ProgressBar) findViewById(R.id.circularProgressbar);
+        final ProgressBar mProgress = findViewById(R.id.circularProgressbar);
         mProgress.setProgress(0);   // Main Progress
         mProgress.setSecondaryProgress(100); // Secondary Progress
         mProgress.setMax(100); // Maximum Progress
@@ -35,7 +36,7 @@ public class ResultActivity extends AppCompatActivity {
         animation.setInterpolator(new DecelerateInterpolator());
         animation.start();*/
 
-        tv = (TextView) findViewById(R.id.tv);
+        tv = findViewById(R.id.tv);
         new Thread(new Runnable() {
 
             @Override
@@ -64,5 +65,12 @@ public class ResultActivity extends AppCompatActivity {
                 }
             }
         }).start();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ResultActivity.this, ProfileActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
     }
 }

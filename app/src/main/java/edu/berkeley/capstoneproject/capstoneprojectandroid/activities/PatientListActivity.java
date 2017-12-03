@@ -18,15 +18,17 @@ import edu.berkeley.capstoneproject.capstoneprojectandroid.listeners.RecyclerIte
 import edu.berkeley.capstoneproject.capstoneprojectandroid.adapters.PatientAdapter;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.models.AppDatabase;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.models.Patient;
+import edu.berkeley.capstoneproject.capstoneprojectandroid.PatientHolder;
 import static edu.berkeley.capstoneproject.capstoneprojectandroid.activities.ProfileActivity.patientListActivity;
 import static edu.berkeley.capstoneproject.capstoneprojectandroid.activities.ProfileActivity.previousActivity;
+
+
 
 public class PatientListActivity extends AppCompatActivity {
 
     private ShimmerRecyclerView shimmerRecycler;
     private PatientAdapter mAdapter;
     private AppDatabase mdb;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,7 @@ public class PatientListActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         setTitle(R.string.ab_list_title1);
 
-        shimmerRecycler = (ShimmerRecyclerView) findViewById(R.id.shimmer_recycler_view);
+        shimmerRecycler = findViewById(R.id.shimmer_recycler_view);
 
 //        if (demoConfiguration.getItemDecoration() != null) {
 //            shimmerRecycler.addItemDecoration(demoConfiguration.getItemDecoration());
@@ -57,6 +59,7 @@ public class PatientListActivity extends AppCompatActivity {
                         Log.i("Patient Selected", p.getTitle() + " " + p.getUid() + " " + String.valueOf(position));
                         Intent intent = new Intent(view.getContext(), ProfileActivity.class);
                         intent.putExtra(previousActivity, patientListActivity);
+                        PatientHolder.setUid(p.getUid());
                         startActivity(intent);
                     }
 
@@ -89,6 +92,8 @@ public class PatientListActivity extends AppCompatActivity {
 //        mdb.userDao().insertAll(plist);
 //        Patient p = new Patient("Alan", "fuck", getResources().getString(R.string.ndtv_image_url), "2018/1/1");
 //        mdb.userDao().insert(p);
+        mdb.userDao().deleteAll();
+        mdb.userDao().insertAll(getPatient(getResources()));
         ArrayList<Patient> tmp = new ArrayList<Patient>(mdb.userDao().getAll());
         mAdapter.setCards(tmp);
         shimmerRecycler.hideShimmerAdapter();
@@ -103,61 +108,123 @@ public class PatientListActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    public static ArrayList<Patient> getPatient(Resources resources) {
 
-        String title = "Annie\t";
+    public static Patient[] getPatient(Resources resources) {
+
+        String title = "Annie";
         String image = resources.getString(R.string.ndtv_image_url);
-        String desc = "1234567";
-        String summary = "2017/5/5/";
+        String desc = "Age: 23\n" +
+                "Condition: Anterior Cruciate Ligament Tear\n" +
+                "Rehabilitation Period : 2 months";
+        String summary = "2017/12/2/";
 
-        final Patient patient1 = new Patient(title, desc, image, summary);
+        Patient patient1 = new Patient(title, desc, image, summary);
 
-        title = "Annie";
+        title = "Oski ";
         image = resources.getString(R.string.op_image_url);
-        desc = "1234567";
-        summary = "2017/5/5/";
+        desc = "Age: 75\n" +
+                "Condition: Fracture of the cruciate ligament\n" +
+                "Rehabilitation Period : 3 years";
 
-        final Patient patient2 = new Patient(title, desc, image, summary);
+        summary = "2017/12/2/";
+
+        Patient patient2 = new Patient(title, desc, image, summary);
 
 
-        title = "Annie";
+        title = "Luke";
         image = resources.getString(R.string.got_image_url);
-        desc = "1234567";
-        summary = "2017/5/5/";
+        desc = "Age: 36\n" +
+                "Condition: Meniscus tear\n" +
+                "Rehabilitation Period : 3 weeks";
+        summary = "2017/12/2/";
 
-        final Patient patient3 = new Patient(title, desc, image, summary);
+        Patient patient3 = new Patient(title, desc, image, summary);
 
-        title = "Annie";
+        title = "Song Yu";
         image = resources.getString(R.string.jet_image_url);
-        desc = "1234567";
-        summary = "2017/5/5/";
+        desc = "Age: 58\n" +
+                "Condition: Thigh fracture\n" +
+                "Rehabilitation Period : 6 months";
+        summary = "2017/12/2/";
 
-        final Patient patient4 = new Patient(title, desc, image, summary);
+        Patient patient4 = new Patient(title, desc, image, summary);
 
-        title = "Annie";
-        image = resources.getString(R.string.jet_image_url);
-        desc = "1234567";
-        summary = "2017/5/5/";
+        title = "Kobe";
+        image = resources.getString(R.string.kobe_image_url);
+        desc = "Age: 39\n" +
+                "Condition:  Torn Achilles Tendon\n" +
+                "Rehabilitation Period : 3 years";
+        summary = "2017/12/2/";
 
-        final Patient patient5 = new Patient(title, desc, image, summary);
+        Patient patient5 = new Patient(title, desc, image, summary);
 
-        title = "Annie";
-        image = resources.getString(R.string.jet_image_url);
-        desc = "1234567";
-        summary = "2017/5/5/";
+        title = "Rose";
+        image = resources.getString(R.string.rose_image_url);
+        desc = "Age: 29\n" +
+                "Condition:  Anterior cruciate ligament injury\n" +
+                "Rehabilitation Period : 5 years";
+        summary = "2017/12/2/";
 
-        final Patient patient6 = new Patient(title, desc, image, summary);
+        Patient patient6 = new Patient(title, desc, image, summary);
 
-        ArrayList<Patient> ret = new ArrayList<Patient>() {{
-            add(patient1);
-            add(patient2);
-            add(patient3);
-            add(patient4);
-            add(patient5);
-            add(patient6);
-
-        }};
-        return ret;
-//        return new Patient[]{patient1, patient2, patient3, patient4, patient5, patient6};
+        return new Patient[]{patient1, patient2, patient3, patient4, patient5, patient6};
     }
+
+//    public static Patient[] getPatient(Resources resources) {
+//
+//        String title = "Annie\t";
+//        String image = resources.getString(R.string.ndtv_image_url);
+//        String desc = "1234567";
+//        String summary = "2017/5/5/";
+//
+//        final Patient patient1 = new Patient(title, desc, image, summary);
+//
+//        title = "Annie";
+//        image = resources.getString(R.string.op_image_url);
+//        desc = "1234567";
+//        summary = "2017/5/5/";
+//
+//        final Patient patient2 = new Patient(title, desc, image, summary);
+//
+//
+//        title = "Annie";
+//        image = resources.getString(R.string.got_image_url);
+//        desc = "1234567";
+//        summary = "2017/5/5/";
+//
+//        final Patient patient3 = new Patient(title, desc, image, summary);
+//
+//        title = "Annie";
+//        image = resources.getString(R.string.jet_image_url);
+//        desc = "1234567";
+//        summary = "2017/5/5/";
+//
+//        final Patient patient4 = new Patient(title, desc, image, summary);
+//
+//        title = "Annie";
+//        image = resources.getString(R.string.jet_image_url);
+//        desc = "1234567";
+//        summary = "2017/5/5/";
+//
+//        final Patient patient5 = new Patient(title, desc, image, summary);
+//
+//        title = "Annie";
+//        image = resources.getString(R.string.jet_image_url);
+//        desc = "1234567";
+//        summary = "2017/5/5/";
+//
+//        final Patient patient6 = new Patient(title, desc, image, summary);
+//
+////        ArrayList<Patient> ret = new ArrayList<Patient>() {{
+////            add(patient1);
+////            add(patient2);
+////            add(patient3);
+////            add(patient4);
+////            add(patient5);
+////            add(patient6);
+////
+////        }};
+////        return ret;
+//        return new Patient[]{patient1, patient2, patient3, patient4, patient5, patient6};
+//    }
 }

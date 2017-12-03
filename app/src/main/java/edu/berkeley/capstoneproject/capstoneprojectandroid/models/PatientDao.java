@@ -22,8 +22,15 @@ public interface PatientDao {
     @Query("SELECT * FROM patients WHERE uid IN (:userIds)")
     List<Patient> loadAllByIds(int[] userIds);
 
+    @Query("SELECT * FROM patients WHERE uid LIKE :uid LIMIT 1")
+    Patient findByUid(int uid);
+
     @Query("SELECT * FROM patients WHERE name LIKE :name LIMIT 1")
     Patient findByName(String name);
+
+    @Query("DELETE FROM patients")
+    void deleteAll();
+
 
     @Insert
     void insertAll(Patient... patients);
@@ -33,4 +40,6 @@ public interface PatientDao {
 
     @Delete
     void delete(Patient patients);
+
+
 }
