@@ -31,7 +31,7 @@ public class ProfileActivity extends AppCompatActivity {
     public static int patientUid;
 
     private final String dtag = "Description: \n";
-    private final String stag = "Summary: \n";
+    private final String stag = "Summary: ";
 
     private AppDatabase mdb;
     private int previousActivityType;

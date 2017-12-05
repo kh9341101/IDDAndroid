@@ -12,6 +12,7 @@ import android.view.View;
 import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import edu.berkeley.capstoneproject.capstoneprojectandroid.R;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.listeners.RecyclerItemClickListener;
@@ -94,7 +95,7 @@ public class PatientListActivity extends AppCompatActivity {
 //        mdb.userDao().insert(p);
         mdb.userDao().deleteAll();
         mdb.userDao().insertAll(getPatient(getResources()));
-        ArrayList<Patient> tmp = new ArrayList<Patient>(mdb.userDao().getAll());
+        ArrayList<Patient> tmp = new ArrayList<>(mdb.userDao().getAll());
         mAdapter.setCards(tmp);
         shimmerRecycler.hideShimmerAdapter();
     }
@@ -117,18 +118,18 @@ public class PatientListActivity extends AppCompatActivity {
                 "Condition: Anterior Cruciate Ligament Tear\n" +
                 "Rehabilitation Period : 2 months";
         String summary = "2017/12/2/";
-
-        Patient patient1 = new Patient(title, desc, image, summary);
+        Float[] tmp = new Float[] {27.5f, 33f, 38f, 47f, 58f, 70f, 82.5f};
+        ArrayList<Float> avgdegree = new ArrayList<>(Arrays.asList(tmp));
+        Patient patient1 = new Patient(title, desc, image, summary, avgdegree);
 
         title = "Oski ";
         image = resources.getString(R.string.op_image_url);
         desc = "Age: 75\n" +
                 "Condition: Fracture of the cruciate ligament\n" +
                 "Rehabilitation Period : 3 years";
-
         summary = "2017/12/2/";
-
-        Patient patient2 = new Patient(title, desc, image, summary);
+//        avgdegree = {27.5f, 33f, 38f, 47f, 58f, 70f, 82.5f};
+        Patient patient2 = new Patient(title, desc, image, summary, avgdegree);
 
 
         title = "Luke";
@@ -137,8 +138,8 @@ public class PatientListActivity extends AppCompatActivity {
                 "Condition: Meniscus tear\n" +
                 "Rehabilitation Period : 3 weeks";
         summary = "2017/12/2/";
-
-        Patient patient3 = new Patient(title, desc, image, summary);
+//        avgdegree = {27.5f, 33f, 38f, 47f, 58f, 70f, 82.5f};
+        Patient patient3 = new Patient(title, desc, image, summary, avgdegree);
 
         title = "Song Yu";
         image = resources.getString(R.string.jet_image_url);
@@ -146,8 +147,8 @@ public class PatientListActivity extends AppCompatActivity {
                 "Condition: Thigh fracture\n" +
                 "Rehabilitation Period : 6 months";
         summary = "2017/12/2/";
-
-        Patient patient4 = new Patient(title, desc, image, summary);
+//        avgdegree = {27.5f, 33f, 38f, 47f, 58f, 70f, 82.5f};
+        Patient patient4 = new Patient(title, desc, image, summary, avgdegree);
 
         title = "Kobe";
         image = resources.getString(R.string.kobe_image_url);
@@ -155,8 +156,8 @@ public class PatientListActivity extends AppCompatActivity {
                 "Condition:  Torn Achilles Tendon\n" +
                 "Rehabilitation Period : 3 years";
         summary = "2017/12/2/";
-
-        Patient patient5 = new Patient(title, desc, image, summary);
+//        avgdegree = {27.5f, 33f, 38f, 47f, 58f, 70f, 82.5f};
+        Patient patient5 = new Patient(title, desc, image, summary, avgdegree);
 
         title = "Rose";
         image = resources.getString(R.string.rose_image_url);
@@ -164,8 +165,8 @@ public class PatientListActivity extends AppCompatActivity {
                 "Condition:  Anterior cruciate ligament injury\n" +
                 "Rehabilitation Period : 5 years";
         summary = "2017/12/2/";
-
-        Patient patient6 = new Patient(title, desc, image, summary);
+//        avgdegree = {27.5f, 33f, 38f, 47f, 58f, 70f, 82.5f};
+        Patient patient6 = new Patient(title, desc, image, summary, avgdegree);
 
         return new Patient[]{patient1, patient2, patient3, patient4, patient5, patient6};
     }

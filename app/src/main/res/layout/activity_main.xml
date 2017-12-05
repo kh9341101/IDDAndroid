@@ -36,9 +36,10 @@
 
         <ListView
             android:id="@+id/list_bluetooth_scanned_devices"
-            style="@style/Widget.AppCompat.ListView.Menu"
+            style="@android:style/Widget.DeviceDefault.ExpandableListView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></ListView>
+            android:layout_height="match_parent"
+            android:entries="@mipmap/ic_launcher_foreground"></ListView>
 
     </LinearLayout>
 

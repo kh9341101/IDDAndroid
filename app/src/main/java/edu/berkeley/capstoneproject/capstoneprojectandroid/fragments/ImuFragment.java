@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -76,9 +77,9 @@ public class ImuFragment extends Feather52Fragment {
 
         mView = inflater.inflate(R.layout.fragment_imu, container, false);
 
-        mAccView = (LineChart) mView.findViewById(R.id.fragment_imu_linechart_acc);
-        mGyrView = (LineChart) mView.findViewById(R.id.fragment_imu_linechart_gyr);
-        mDegText = (TextView) mView.findViewById(R.id.fragment_degree);
+        mAccView = mView.findViewById(R.id.fragment_imu_linechart_acc);
+        mGyrView = mView.findViewById(R.id.fragment_imu_linechart_gyr);
+        mDegText = mView.findViewById(R.id.fragment_degree);
 //        mEncoderView = (LineChart) mView.findViewById(R.id.fragment_imu_linechart_encoder);
 
         initLineChart(mAccView);
@@ -148,7 +149,7 @@ public class ImuFragment extends Feather52Fragment {
                 if (label.equals(IMU.LABEL_IMU_GYR_Z))
                     gyr2 = value;
 
-                mDegText.setText("Knee Degree : "+String.valueOf(calBendDegree(gyr1, gyr2)));
+                mDegText.setText("Bend Degree : "+String.valueOf(calBendDegree(gyr1, gyr2)));
             }
 
         }
@@ -185,6 +186,9 @@ public class ImuFragment extends Feather52Fragment {
         set.addEntry(e);
         //data.addEntry(e, 0);
         data.notifyDataChanged();
+        Description description = new Description();
+        description.setText("");
+        lineChart.setDescription(description);
         lineChart.notifyDataSetChanged();
         lineChart.setVisibleXRangeMaximum(10000);
         lineChart.moveViewTo(e.getX(), e.getY(), YAxis.AxisDependency.LEFT);
