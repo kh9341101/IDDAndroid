@@ -126,7 +126,7 @@ public class PatientListActivity extends AppCompatActivity {
                 "Condition: Fracture of the cruciate ligament\n" +
                 "Rehabilitation Period : 3 years";
 
-        summary = "2017/12/2/";
+        summary = "Return visit once a month";
 
         Patient patient2 = new Patient(title, desc, image, summary);
 
@@ -136,7 +136,7 @@ public class PatientListActivity extends AppCompatActivity {
         desc = "Age: 36\n" +
                 "Condition: Meniscus tear\n" +
                 "Rehabilitation Period : 3 weeks";
-        summary = "2017/12/2/";
+        summary = "Return visit once a week";
 
         Patient patient3 = new Patient(title, desc, image, summary);
 

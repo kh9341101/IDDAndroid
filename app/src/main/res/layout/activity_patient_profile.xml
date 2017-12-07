@@ -84,7 +84,7 @@
                     android:layout_below="@+id/patient_name"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
-                    android:text="(Adhyaksh)"
+                    android:text="(Male)"
                     android:textColor="#fff"
                     android:textSize="18sp" />
             </RelativeLayout>
