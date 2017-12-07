@@ -1,4 +1,4 @@
-package edu.berkeley.capstoneproject.capstoneprojectandroid.models;
+package edu.berkeley.capstoneproject.capstoneprojectandroid.database;
 
 import android.arch.persistence.room.TypeConverter;
 

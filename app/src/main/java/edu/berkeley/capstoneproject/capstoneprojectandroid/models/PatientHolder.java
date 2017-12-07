@@ -1,20 +1,17 @@
-package edu.berkeley.capstoneproject.capstoneprojectandroid;
+package edu.berkeley.capstoneproject.capstoneprojectandroid.models;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
-import android.content.Context;
-import android.content.Intent;
 
 
-import edu.berkeley.capstoneproject.capstoneprojectandroid.activities.ProfileActivity;
-import edu.berkeley.capstoneproject.capstoneprojectandroid.models.Patient;
+import edu.berkeley.capstoneproject.capstoneprojectandroid.R;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.adapters.PatientAdapter;
+import edu.berkeley.capstoneproject.capstoneprojectandroid.database.Patient;
 
 /**
  * Created by LukeTseng on 30/11/2017.

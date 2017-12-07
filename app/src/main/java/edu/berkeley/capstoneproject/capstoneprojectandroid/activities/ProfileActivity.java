@@ -9,17 +9,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.R;
-import edu.berkeley.capstoneproject.capstoneprojectandroid.models.Patient;
-import edu.berkeley.capstoneproject.capstoneprojectandroid.PatientHolder;
+import edu.berkeley.capstoneproject.capstoneprojectandroid.database.Patient;
+import edu.berkeley.capstoneproject.capstoneprojectandroid.models.PatientHolder;
+import static edu.berkeley.capstoneproject.capstoneprojectandroid.activities.LoginActivity.userType;
 
 import butterknife.ButterKnife;
 import butterknife.BindView;
-import edu.berkeley.capstoneproject.capstoneprojectandroid.models.AppDatabase;
+import edu.berkeley.capstoneproject.capstoneprojectandroid.database.AppDatabase;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -51,16 +50,6 @@ public class ProfileActivity extends AppCompatActivity {
         previousActivityType = getIntent().getIntExtra(previousActivity, -1);
 //        patientUid = getIntent().getIntExtra(patientKey, -1);
 
-
-        _mexercise.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
         _mresult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,6 +58,23 @@ public class ProfileActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
+        if (userType == 0) {
+            Log.d("Doctor", "No Exercise");
+            _mexercise.setVisibility(View.INVISIBLE);
+        } else if (userType == 1) {
+            _mexercise.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        }
+
+
 
         mdb = AppDatabase.getAppDatabase(getApplicationContext());
         patientUid = PatientHolder.getUid();

@@ -219,11 +219,11 @@ public class MainActivity extends Activity {
         mPairedDevicesAdapter = new BluetoothDeviceAdapter(this, R.layout.bluetooth_device, new ArrayList<BluetoothDevice>());
         mScannedDevicesAdapter = new BluetoothDeviceAdapter(this, R.layout.bluetooth_device, new ArrayList<BluetoothDevice>());
 
-        mScannedListView = (ListView) findViewById(R.id.list_bluetooth_scanned_devices);
+        mScannedListView = findViewById(R.id.list_bluetooth_scanned_devices);
         mScannedListView.setAdapter(mScannedDevicesAdapter);
         mScannedListView.setOnItemClickListener(mDeviceClickListener);
 
-        mScanButton = (Button) findViewById(R.id.button_bluetooth_scan);
+        mScanButton = findViewById(R.id.button_bluetooth_scan);
         mScanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -440,10 +440,5 @@ public class MainActivity extends Activity {
         //this.unregisterReceiver(mReceiver);
 
         super.onDestroy();
-    }
-
-    @Override
-    public void onBackPressed() {
-
     }
 }

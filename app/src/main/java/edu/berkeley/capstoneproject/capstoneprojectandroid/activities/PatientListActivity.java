@@ -17,9 +17,9 @@ import java.util.Arrays;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.R;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.listeners.RecyclerItemClickListener;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.adapters.PatientAdapter;
-import edu.berkeley.capstoneproject.capstoneprojectandroid.models.AppDatabase;
-import edu.berkeley.capstoneproject.capstoneprojectandroid.models.Patient;
-import edu.berkeley.capstoneproject.capstoneprojectandroid.PatientHolder;
+import edu.berkeley.capstoneproject.capstoneprojectandroid.database.AppDatabase;
+import edu.berkeley.capstoneproject.capstoneprojectandroid.database.Patient;
+import edu.berkeley.capstoneproject.capstoneprojectandroid.models.PatientHolder;
 import static edu.berkeley.capstoneproject.capstoneprojectandroid.activities.ProfileActivity.patientListActivity;
 import static edu.berkeley.capstoneproject.capstoneprojectandroid.activities.ProfileActivity.previousActivity;
 
@@ -112,15 +112,21 @@ public class PatientListActivity extends AppCompatActivity {
 
     public static Patient[] getPatient(Resources resources) {
 
+        Float[] tmpcount = new Float[] {0f, 0f, 0f, 0f, 0f, 0f, 0f};
+        Float[] tmpmax = new Float[] {0f, 0f, 0f, 0f, 0f, 0f, 0f};
+
+        Float[] tmpavg = new Float[] {27.5f, 33f, 38f, 47f, 58f, 70f, 82.5f};
+        ArrayList<Float> avgdegree = new ArrayList<>(Arrays.asList(tmpavg));
+        ArrayList<Float> bendcount = new ArrayList<>(Arrays.asList(tmpcount));
+        ArrayList<Float> maxdegree = new ArrayList<>(Arrays.asList(tmpmax));
+
         String title = "Annie";
         String image = resources.getString(R.string.ndtv_image_url);
         String desc = "Age: 23\n" +
                 "Condition: Anterior Cruciate Ligament Tear\n" +
                 "Rehabilitation Period : 2 months";
         String summary = "2017/12/2/";
-        Float[] tmp = new Float[] {27.5f, 33f, 38f, 47f, 58f, 70f, 82.5f};
-        ArrayList<Float> avgdegree = new ArrayList<>(Arrays.asList(tmp));
-        Patient patient1 = new Patient(title, desc, image, summary, avgdegree);
+        Patient patient1 = new Patient(title, desc, image, summary, avgdegree, bendcount, maxdegree);
 
         title = "Oski ";
         image = resources.getString(R.string.op_image_url);
@@ -129,7 +135,7 @@ public class PatientListActivity extends AppCompatActivity {
                 "Rehabilitation Period : 3 years";
         summary = "2017/12/2/";
 //        avgdegree = {27.5f, 33f, 38f, 47f, 58f, 70f, 82.5f};
-        Patient patient2 = new Patient(title, desc, image, summary, avgdegree);
+        Patient patient2 = new Patient(title, desc, image, summary, avgdegree, bendcount, maxdegree);
 
 
         title = "Luke";
@@ -139,7 +145,7 @@ public class PatientListActivity extends AppCompatActivity {
                 "Rehabilitation Period : 3 weeks";
         summary = "2017/12/2/";
 //        avgdegree = {27.5f, 33f, 38f, 47f, 58f, 70f, 82.5f};
-        Patient patient3 = new Patient(title, desc, image, summary, avgdegree);
+        Patient patient3 = new Patient(title, desc, image, summary, avgdegree, bendcount, maxdegree);
 
         title = "Song Yu";
         image = resources.getString(R.string.jet_image_url);
@@ -148,7 +154,7 @@ public class PatientListActivity extends AppCompatActivity {
                 "Rehabilitation Period : 6 months";
         summary = "2017/12/2/";
 //        avgdegree = {27.5f, 33f, 38f, 47f, 58f, 70f, 82.5f};
-        Patient patient4 = new Patient(title, desc, image, summary, avgdegree);
+        Patient patient4 = new Patient(title, desc, image, summary, avgdegree, bendcount, maxdegree);
 
         title = "Kobe";
         image = resources.getString(R.string.kobe_image_url);
@@ -157,7 +163,7 @@ public class PatientListActivity extends AppCompatActivity {
                 "Rehabilitation Period : 3 years";
         summary = "2017/12/2/";
 //        avgdegree = {27.5f, 33f, 38f, 47f, 58f, 70f, 82.5f};
-        Patient patient5 = new Patient(title, desc, image, summary, avgdegree);
+        Patient patient5 = new Patient(title, desc, image, summary, avgdegree, bendcount, maxdegree);
 
         title = "Rose";
         image = resources.getString(R.string.rose_image_url);
@@ -166,7 +172,7 @@ public class PatientListActivity extends AppCompatActivity {
                 "Rehabilitation Period : 5 years";
         summary = "2017/12/2/";
 //        avgdegree = {27.5f, 33f, 38f, 47f, 58f, 70f, 82.5f};
-        Patient patient6 = new Patient(title, desc, image, summary, avgdegree);
+        Patient patient6 = new Patient(title, desc, image, summary, avgdegree, bendcount, maxdegree);
 
         return new Patient[]{patient1, patient2, patient3, patient4, patient5, patient6};
     }

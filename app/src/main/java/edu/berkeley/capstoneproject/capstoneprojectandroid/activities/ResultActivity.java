@@ -5,13 +5,8 @@ import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -26,22 +21,18 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.zip.DataFormatException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import edu.berkeley.capstoneproject.capstoneprojectandroid.PatientHolder;
+import edu.berkeley.capstoneproject.capstoneprojectandroid.models.PatientHolder;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.R;
-import edu.berkeley.capstoneproject.capstoneprojectandroid.models.Patient;
-import edu.berkeley.capstoneproject.capstoneprojectandroid.models.AppDatabase;
+import edu.berkeley.capstoneproject.capstoneprojectandroid.database.AppDatabase;
 
 public class ResultActivity extends AppCompatActivity {
     int pStatus = 0;
@@ -242,11 +233,12 @@ public class ResultActivity extends AppCompatActivity {
 
             XAxis xAxis = mChart.getXAxis();
 //            xAxis.setDrawGridLines(false);
+            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
             xAxis.setValueFormatter(new IAxisValueFormatter() {
 
                 @Override
                 public String getFormattedValue(float value, AxisBase axis) {
-                    return getnPreviousDateString(-1 * (int) value);
+                    return getnPreviousDateString((int) value - 6);
                 }
             });
 

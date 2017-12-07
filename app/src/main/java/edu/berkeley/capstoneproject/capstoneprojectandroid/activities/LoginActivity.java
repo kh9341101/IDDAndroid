@@ -15,6 +15,9 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.BindView;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.R;
+import edu.berkeley.capstoneproject.capstoneprojectandroid.database.AppDatabase;
+import edu.berkeley.capstoneproject.capstoneprojectandroid.models.PatientHolder;
+
 import static edu.berkeley.capstoneproject.capstoneprojectandroid.activities.ProfileActivity.loginActivity;
 import static edu.berkeley.capstoneproject.capstoneprojectandroid.activities.ProfileActivity.patientListActivity;
 import static edu.berkeley.capstoneproject.capstoneprojectandroid.activities.ProfileActivity.previousActivity;
@@ -23,7 +26,8 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
 
-    private int userType = 0;
+    public static int userType = 0;
+    private AppDatabase mdb;
 
     @BindView(R.id.input_email) EditText _emailText;
     @BindView(R.id.input_password) EditText _passwordText;
@@ -59,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        mdb = AppDatabase.getAppDatabase(getApplicationContext());
     }
 
     public void login() {
@@ -87,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         if (email.equals("padmin") && password.equals("padmin")) {
             userType = 1;
+            PatientHolder.setUid(mdb.userDao().randIntance().getUid());
         }
 
 
