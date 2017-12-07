@@ -58,6 +58,7 @@
         android:layout_marginStart="65dp"
         android:layout_marginTop="27dp"
         android:text="Recovery Progress"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView
@@ -68,6 +69,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginBottom="11dp"
         android:layout_marginStart="16dp"
+        android:textSize="18sp"
         android:text="Today's Max : 60°" />
 
     <TextView
@@ -77,6 +79,7 @@
         android:layout_alignBaseline="@+id/tv"
         android:layout_alignBottom="@+id/tv"
         android:layout_alignStart="@+id/dailymax"
+        android:textSize="18sp"
         android:text="Today's Avg: 48.26°" />
 
     <TextView
@@ -86,6 +89,7 @@
         android:layout_alignStart="@+id/dailyavg"
         android:layout_below="@+id/dailyavg"
         android:layout_marginTop="15dp"
+        android:textSize="18sp"
         android:text="Bend Count: 44 °" />
 
 </RelativeLayout>
