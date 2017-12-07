@@ -1,6 +1,5 @@
-package edu.berkeley.capstoneproject.capstoneprojectandroid.models;
+package edu.berkeley.capstoneproject.capstoneprojectandroid.database;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.arch.persistence.room.Dao;
@@ -30,6 +29,13 @@ public interface PatientDao {
 
     @Query("DELETE FROM patients")
     void deleteAll();
+
+
+//    @Query("SELECT * FROM patients ORDER by RAND() LIMIT 1")
+//    @Query("SELECT * FROM patients WHERE id IN (SELECT id FROM patients ORDER BY RANDOM() LIMIT 1)")
+    @Query("SELECT * FROM patients ORDER BY RANDOM() LIMIT 1")
+    Patient randIntance();
+
 
 
     @Insert

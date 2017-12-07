@@ -1,8 +1,9 @@
-package edu.berkeley.capstoneproject.capstoneprojectandroid.models;
+package edu.berkeley.capstoneproject.capstoneprojectandroid.database;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
-import android.arch.persistence.room.Room;
+
+import java.util.ArrayList;
 
 /**
  * Created by LukeTseng on 29/11/2017.
@@ -21,12 +22,32 @@ public class Patient {
     private String mThumbnailUrl;
     @ColumnInfo(name = "sumtext")
     private String mSummaryText;
+    @ColumnInfo(name = "dailyavgdegree")
+    public ArrayList<Float> mdailyAvgDegree;
+    @ColumnInfo(name = "dailymaxdegree")
+    public ArrayList<Float> mdailyMaxDegree;
+    @ColumnInfo(name = "dailybendcount")
+    public ArrayList<Float> mdailyBendCount;
 
-    public Patient(String mTitle, String mDescription, String mThumbnailUrl, String mSummaryText) {
+//    public Patient(String mTitle, String mDescription, String mThumbnailUrl, String mSummaryText) {
+//        this.mTitle = mTitle;
+//        this.mDescription = mDescription;
+//        this.mThumbnailUrl = mThumbnailUrl;
+//        this.mSummaryText = mSummaryText;
+////        this.dailyAvgDegree = new ArrayList<>();
+////        this.mdailyAvgDegree = dailyAvgDegree;
+//
+//    }
+
+    public Patient(String mTitle, String mDescription, String mThumbnailUrl, String mSummaryText, ArrayList<Float> mdailyAvgDegree, ArrayList<Float> mdailyBendCount, ArrayList<Float> mdailyMaxDegree) {
         this.mTitle = mTitle;
         this.mDescription = mDescription;
         this.mThumbnailUrl = mThumbnailUrl;
         this.mSummaryText = mSummaryText;
+        this.mdailyAvgDegree = new ArrayList<>();
+        this.mdailyAvgDegree = mdailyAvgDegree;
+        this.mdailyBendCount = mdailyBendCount;
+        this.mdailyMaxDegree = mdailyMaxDegree;
     }
 
     public int getUid() { return uid; }
@@ -59,6 +80,28 @@ public class Patient {
     public void setSummaryText(String mSummaryText) {
         this.mSummaryText = mSummaryText;
     }
+
+    public ArrayList<Float> getDailyAvgDegree() {
+        return mdailyAvgDegree;
+    }
+    public void setmDailyAvgDegree(ArrayList<Float> mdailyAvgDegree) {
+        this.mdailyAvgDegree = mdailyAvgDegree;
+    }
+
+    public ArrayList<Float> getDailyMaxDegree() {
+        return mdailyMaxDegree;
+    }
+    public void setDailyMaxDegree(ArrayList<Float> mdailyMaxDegree) {
+        this.mdailyMaxDegree = mdailyMaxDegree;
+    }
+
+    public ArrayList<Float> getDailyBendCount() {
+        return mdailyBendCount;
+    }
+    public void setdailyBendCount(ArrayList<Float> mdailyBendCount) {
+        this.mdailyBendCount = mdailyBendCount;
+    }
+
 //    private String mName;
 //    private String mGender;
 //    private String mAge;

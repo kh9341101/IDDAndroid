@@ -16,15 +16,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:baselineAligned="false"
+            android:fontFamily="@font/aladin"
             android:text="Degree"
-            android:textSize="36sp" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Chart" />
+            android:textSize="40sp" />
 
     </LinearLayout>
 

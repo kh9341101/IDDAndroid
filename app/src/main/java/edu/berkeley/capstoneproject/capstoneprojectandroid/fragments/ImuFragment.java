@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -23,12 +24,16 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import edu.berkeley.capstoneproject.capstoneprojectandroid.CapstoneProjectAndroidApplication;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.R;
+import edu.berkeley.capstoneproject.capstoneprojectandroid.database.AppDatabase;
+import edu.berkeley.capstoneproject.capstoneprojectandroid.database.Patient;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.models.Feather52;
+import edu.berkeley.capstoneproject.capstoneprojectandroid.models.PatientHolder;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.models.sensors.Encoder;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.models.sensors.IMU;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.services.Feather52Service;
@@ -44,11 +49,8 @@ import static edu.berkeley.capstoneproject.capstoneprojectandroid.services.Feath
 public class ImuFragment extends Feather52Fragment {
 
     private static final String TAG = ImuFragment.class.getSimpleName();
-
     public static final String EXTRA_SENSOR_ID = "EXTRA_SENSOR_ID";
-
     private Feather52Service mFeather52Service;
-
     private final Feather52 mFeather52 = CapstoneProjectAndroidApplication.getInstance().getFeather52();
     private IMU mImu;
 
@@ -60,7 +62,6 @@ public class ImuFragment extends Feather52Fragment {
     private LineChart mGyrView;
     private LineChart mEncoderView;
     private TextView mDegText;
-
     private int[] mColors = new int[] {
             ColorTemplate.COLORFUL_COLORS[0],
             ColorTemplate.COLORFUL_COLORS[1],
@@ -70,20 +71,32 @@ public class ImuFragment extends Feather52Fragment {
             ColorTemplate.LIBERTY_COLORS[2],
     };
 
+    private AppDatabase mdb;
+    private final float tolerance = 0.5f;
+    private float bendCount = 0;
+    private float prevDegree = 0;
+    private float curDegree = 0;
+    private float avgDegreeSum = 0;
+    private float maxDegree = 0;
+    private ArrayList<Float> Degree;
+    private float nextDegree;
+    private Patient mpatient;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         mView = inflater.inflate(R.layout.fragment_imu, container, false);
 
-        mAccView = (LineChart) mView.findViewById(R.id.fragment_imu_linechart_acc);
-        mGyrView = (LineChart) mView.findViewById(R.id.fragment_imu_linechart_gyr);
-        mDegText = (TextView) mView.findViewById(R.id.fragment_degree);
-//        mEncoderView = (LineChart) mView.findViewById(R.id.fragment_imu_linechart_encoder);
+        mAccView = mView.findViewById(R.id.fragment_imu_linechart_acc);
+        mGyrView = mView.findViewById(R.id.fragment_imu_linechart_gyr);
+        mDegText = mView.findViewById(R.id.fragment_degree);
 
         initLineChart(mAccView);
         initLineChart(mGyrView);
-//        initLineChart(mEncoderView);
+        mdb = AppDatabase.getAppDatabase(getActivity().getApplicationContext());
+        mpatient = mdb.userDao().findByUid(PatientHolder.getUid());
+        recordDegree();
 
         return mView;
     }
@@ -125,7 +138,6 @@ public class ImuFragment extends Feather52Fragment {
     public void clearUi() {
         clearLineChart(mAccView);
         clearLineChart(mGyrView);
-//        clearLineChart(mEncoderView);
     }
 
 
@@ -148,11 +160,38 @@ public class ImuFragment extends Feather52Fragment {
                 if (label.equals(IMU.LABEL_IMU_GYR_Z))
                     gyr2 = value;
 
-                mDegText.setText("Knee Degree : "+String.valueOf(calBendDegree(gyr1, gyr2)));
+//                prevDegree = curDegree;
+//                curDegree = nextDegree;
+                nextDegree = calBendDegree(gyr1, gyr2);
+
+//                if (Degree[0] != prevDegree)
+//                    Degree[0] = prevDegree;
+//                if (Degree[1] != curDegree)
+//                    Degree[1] = curDegree;
+//                if (Degree[2] != nextDegree)
+//                    Degree[2] = nextDegree;
+                mDegText.setText("Bend Degree : "+String.valueOf(nextDegree));
             }
 
         }
     };
+
+    @Override
+    public void onDestroy() {
+        ArrayList<Float> dailyBendCount = mpatient.getDailyBendCount();
+        ArrayList<Float> dailyAvg = mpatient.getDailyAvgDegree();
+        ArrayList<Float> dailyMax = mpatient.getDailyMaxDegree();
+        float pCount = dailyBendCount.get(dailyBendCount.size() - 1);
+        float pAvg = dailyAvg.get(dailyAvg.size() - 1);
+        dailyAvg.set(dailyAvg.size() - 1, (pCount * pAvg + avgDegreeSum)/(pCount + bendCount));
+        Log.i("Update Avg Degree", String.valueOf(pAvg) + " to " + dailyAvg.get(dailyAvg.size() - 1));
+//                pAvg * (pCount / (pCount + bendCount)) + avgDegree * (bendCount / (bendCount + pCount));
+        dailyBendCount.set(dailyBendCount.size() - 1, pCount + bendCount);
+        if (maxDegree > dailyMax.get(dailyMax.size() - 1)) {
+            dailyMax.set(dailyMax.size() - 1, maxDegree);
+        }
+        super.onDestroy();
+    }
 
     private void addDataEntry(String label, Entry e) {
 
@@ -185,6 +224,9 @@ public class ImuFragment extends Feather52Fragment {
         set.addEntry(e);
         //data.addEntry(e, 0);
         data.notifyDataChanged();
+        Description description = new Description();
+        description.setText("");
+        lineChart.setDescription(description);
         lineChart.notifyDataSetChanged();
         lineChart.setVisibleXRangeMaximum(10000);
         lineChart.moveViewTo(e.getX(), e.getY(), YAxis.AxisDependency.LEFT);
@@ -242,4 +284,39 @@ public class ImuFragment extends Feather52Fragment {
         return angle%360;
     }
 
+    private void recordDegree() {
+        if (Degree == null) {
+            Degree = new ArrayList<>();
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("Thread", "Befroe add Degree");
+                if (Degree.size() == 0 || Math.abs(Degree.get(Degree.size() - 1) - nextDegree) > tolerance) {
+                    Degree.add(nextDegree);
+                }
+                float t = findLocalMax();
+                if (t != -1) {
+                    bendCount ++;
+                    avgDegreeSum += t;
+                    if (t > maxDegree) {
+                        maxDegree = t;
+                    }
+                }
+            }
+        }).start();
+    }
+
+    private float findLocalMax() {
+
+//        return (Degree[1] - Degree[0] > tolerance && Degree[1] - Degree[2] > tolerance);
+        final int sz = Degree.size();
+
+        if (sz > 3 && Degree.get(sz - 3) < Degree.get(sz - 2) && Degree.get(sz - 2) > Degree.get(sz - 1)) {
+            Log.d("CheckMax", "1: " + String.valueOf(Degree.get(sz-3)) + " 2: " + String.valueOf(Degree.get(sz-2)) + " 3: " + String.valueOf(Degree.get(sz-1)));
+            return Degree.get(sz - 2);
+        }
+        else
+            return -1;
+    }
 }

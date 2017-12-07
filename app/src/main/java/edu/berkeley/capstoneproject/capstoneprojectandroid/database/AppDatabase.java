@@ -1,8 +1,9 @@
-package edu.berkeley.capstoneproject.capstoneprojectandroid.models;
+package edu.berkeley.capstoneproject.capstoneprojectandroid.database;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
 
@@ -10,7 +11,8 @@ import android.content.Context;
  * Created by LukeTseng on 01/12/2017.
  */
 
-@Database(entities = {Patient.class}, version = 1)
+@Database(entities = {Patient.class}, version = 3)
+@TypeConverters(Converters.class)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase sInstance;
 
@@ -19,10 +21,11 @@ public abstract class AppDatabase extends RoomDatabase {
     public static AppDatabase getAppDatabase(Context context) {
 
         if (sInstance == null) {
-            sInstance = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "user-database")
+            sInstance = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "user-edu.berkeley.capstoneproject.capstoneprojectandroid.database")
                             // allow queries on the main thread.
                             // Don't do this on a real app! See PersistenceBasicSample for an example.
                             .allowMainThreadQueries()
+                            .fallbackToDestructiveMigration()
                             .build();
         }
         return sInstance;

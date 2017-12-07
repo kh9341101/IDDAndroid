@@ -15,7 +15,7 @@
     <application
         android:name=".CapstoneProjectAndroidApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/knee_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -37,7 +37,6 @@
         <activity
             android:name=".activities.Feather52Activity"
             android:theme="@style/AppTheme_" />
-        <activity android:name=".fragments.ImuFragment" />
         <activity android:name=".activities.MyServiceActivity" />
 
         <service android:name=".services.BluetoothLeService" />

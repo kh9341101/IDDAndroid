@@ -5,10 +5,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import edu.berkeley.capstoneproject.capstoneprojectandroid.PatientHolder;
-import edu.berkeley.capstoneproject.capstoneprojectandroid.models.Patient;
+import edu.berkeley.capstoneproject.capstoneprojectandroid.models.PatientHolder;
+import edu.berkeley.capstoneproject.capstoneprojectandroid.database.Patient;
 
 
 /**
@@ -49,7 +48,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientHolder> {
     }
 
     public interface onPatientSelectedListener {
-        public void onPatientSelected(View v, int position);
+        void onPatientSelected(View v, int position);
     }
 
     public Patient getItemAtPostition(int position) {
