@@ -128,7 +128,7 @@ public class PatientListActivity extends AppCompatActivity {
         String summary = "2017/12/2/";
         Patient patient1 = new Patient(title, desc, image, summary, avgdegree, bendcount, maxdegree);
 
-        title = "Oski ";
+        title = "Oski";
         image = resources.getString(R.string.op_image_url);
         desc = "Age: 75\n" +
                 "Condition: Fracture of the cruciate ligament\n" +

@@ -14,6 +14,10 @@ public class Patient {
     @PrimaryKey(autoGenerate = true)
     private int uid;
 
+//    @ColumnInfo(name = "account")
+//    private String mAccount;
+//    @ColumnInfo(name = "password")
+//    private String mPassword;
     @ColumnInfo(name = "name")
     private String mTitle;
     @ColumnInfo(name = "description")

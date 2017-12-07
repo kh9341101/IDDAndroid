@@ -90,9 +90,30 @@ public class LoginActivity extends AppCompatActivity {
         if (email.equals("admin") && password.equals("admin")) {
             userType = 0;
         }
-        if (email.equals("padmin") && password.equals("padmin")) {
+
+        if (email.equals("padmin") && password.equals("padmin1")) {
             userType = 1;
-            PatientHolder.setUid(mdb.userDao().randIntance().getUid());
+            PatientHolder.setUid(mdb.userDao().findByName("Annie").getUid());
+        }
+        else if (email.equals("padmin") && password.equals("padmin2")) {
+            userType = 1;
+            PatientHolder.setUid(mdb.userDao().findByName("Oski").getUid());
+        }
+        else if (email.equals("padmin") && password.equals("padmin3")) {
+            userType = 1;
+            PatientHolder.setUid(mdb.userDao().findByName("Luke").getUid());
+        }
+        else if (email.equals("padmin") && password.equals("padmin4")) {
+            userType = 1;
+            PatientHolder.setUid(mdb.userDao().findByName("Song Yu").getUid());
+        }
+        else if (email.equals("padmin") && password.equals("padmin5")) {
+            userType = 1;
+            PatientHolder.setUid(mdb.userDao().findByName("Kobe").getUid());
+        }
+        else if (email.equals("padmin") && password.equals("padmin6")) {
+            userType = 1;
+            PatientHolder.setUid(mdb.userDao().findByName("Rose").getUid());
         }
 
 
@@ -159,7 +180,7 @@ public class LoginActivity extends AppCompatActivity {
         if (email.equals("admin") && password.equals("admin")) {
             return valid;
         }
-        if (email.equals("padmin") && password.equals("padmin")) {
+        if (email.equals("padmin")) {
             return valid;
         }
 

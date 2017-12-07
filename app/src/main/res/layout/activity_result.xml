@@ -44,18 +44,18 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textView2"
+        android:layout_above="@+id/dailymax"
         android:layout_marginBottom="25dp"
-        android:layout_toEndOf="@+id/textView3"
+        android:layout_toEndOf="@+id/dailyavg"
         android:text="Recovery Progress"
         android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/dailymax"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textView3"
+        android:layout_above="@+id/dailyavg"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="11dp"
         android:layout_marginStart="16dp"
@@ -63,12 +63,12 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/dailyavg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/tv"
         android:layout_alignBottom="@+id/tv"
-        android:layout_alignStart="@+id/textView2"
+        android:layout_alignStart="@+id/dailymax"
         android:text="Current Max : 48.26 °"
         android:textSize="18sp" />
 
@@ -76,8 +76,8 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView3"
-        android:layout_below="@+id/textView3"
+        android:layout_alignStart="@+id/dailyavg"
+        android:layout_below="@+id/dailyavg"
         android:layout_marginTop="15dp"
         android:text="Daily Goal : 44 °"
         android:textSize="18sp" />

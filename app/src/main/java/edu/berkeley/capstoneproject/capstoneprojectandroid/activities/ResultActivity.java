@@ -30,6 +30,7 @@ import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import edu.berkeley.capstoneproject.capstoneprojectandroid.database.Patient;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.models.PatientHolder;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.R;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.database.AppDatabase;
@@ -40,10 +41,15 @@ public class ResultActivity extends AppCompatActivity {
     private AppDatabase mdb;
     private Handler handler = new Handler();
 
-    @BindView(R.id.tv) TextView tv;
+    @BindView(R.id.tv)                  TextView tv;
     @BindView(R.id.circularProgressbar) ProgressBar mProgress;
-    @BindView(R.id.degreechart) LineChart mChart;
+    @BindView(R.id.degreechart)         LineChart mChart;
+    @BindView(R.id.dailyavg)            TextView mAvg;
+    @BindView(R.id.dailymax)            TextView mMax;
+    @BindView(R.id.dailybendcount)      TextView mBendCount;
 
+
+    private Patient mpatient;
 
 
     @Override
@@ -55,7 +61,7 @@ public class ResultActivity extends AppCompatActivity {
 //        final ProgressBar mProgress = findViewById(R.id.circularProgressbar);
 
         mdb = AppDatabase.getAppDatabase(getApplicationContext());
-
+        mpatient = mdb.userDao().findByUid(PatientHolder.getUid());
         Drawable drawable = getResources().getDrawable(R.drawable.circular);
         mProgress.setProgress(0);   // Main Progress
         mProgress.setSecondaryProgress(100); // Secondary Progress
@@ -67,6 +73,10 @@ public class ResultActivity extends AppCompatActivity {
         animation.setInterpolator(new DecelerateInterpolator());
         animation.start();*/
 //        addData2Chart();
+        mAvg.setText("Today's Avg: " + String.valueOf(mpatient.getDailyAvgDegree().get(mpatient.getDailyAvgDegree().size() - 1)) + "°");
+        mMax.setText("Today's Max: " + String.valueOf(mpatient.getDailyMaxDegree().get(mpatient.getDailyMaxDegree().size() - 1)) + "°");
+        mBendCount.setText("Bend Count: " + String.valueOf(mpatient.getDailyBendCount().get(mpatient.getDailyBendCount().size() - 1)));
+
         new Thread(new Runnable() {
 
             @Override
@@ -180,8 +190,8 @@ public class ResultActivity extends AppCompatActivity {
 
 
         ArrayList<Entry> values = new ArrayList<Entry>();
-        ArrayList<Float> t = mdb.userDao().findByUid(PatientHolder.getUid()).getDailyAvgDegree();
-
+//        ArrayList<Float> t = mdb.userDao().findByUid(PatientHolder.getUid()).getDailyAvgDegree();
+        ArrayList<Float> t = mpatient.getDailyAvgDegree();
         for (int i = 0; i < t.size(); i++) {
 
 //            float val = (float) (Math.random() * range) + 3;
