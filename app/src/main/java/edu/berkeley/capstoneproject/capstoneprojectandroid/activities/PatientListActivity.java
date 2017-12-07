@@ -125,7 +125,7 @@ public class PatientListActivity extends AppCompatActivity {
         String desc = "Age: 23\n" +
                 "Condition: Anterior Cruciate Ligament Tear\n" +
                 "Rehabilitation Period : 2 months";
-        String summary = "2017/12/2/";
+        String summary = "Return visit once a week";
         Patient patient1 = new Patient(title, desc, image, summary, avgdegree, bendcount, maxdegree);
 
         title = "Oski ";
@@ -133,9 +133,9 @@ public class PatientListActivity extends AppCompatActivity {
         desc = "Age: 75\n" +
                 "Condition: Fracture of the cruciate ligament\n" +
                 "Rehabilitation Period : 3 years";
-        summary = "2017/12/2/";
+        summary = "Return visit once a month";
 //        avgdegree = {27.5f, 33f, 38f, 47f, 58f, 70f, 82.5f};
-        Patient patient2 = new Patient(titlegit , desc, image, summary, avgdegree, bendcount, maxdegree);
+        Patient patient2 = new Patient(title , desc, image, summary, avgdegree, bendcount, maxdegree);
 
 
         title = "Luke";
@@ -143,7 +143,7 @@ public class PatientListActivity extends AppCompatActivity {
         desc = "Age: 36\n" +
                 "Condition: Meniscus tear\n" +
                 "Rehabilitation Period : 3 weeks";
-        summary = "2017/12/2/";
+        summary = "Return visit once a week";
 //        avgdegree = {27.5f, 33f, 38f, 47f, 58f, 70f, 82.5f};
         Patient patient3 = new Patient(title, desc, image, summary, avgdegree, bendcount, maxdegree);
 
@@ -152,7 +152,7 @@ public class PatientListActivity extends AppCompatActivity {
         desc = "Age: 58\n" +
                 "Condition: Thigh fracture\n" +
                 "Rehabilitation Period : 6 months";
-        summary = "2017/12/2/";
+        summary = "Return visit once a month";
 //        avgdegree = {27.5f, 33f, 38f, 47f, 58f, 70f, 82.5f};
         Patient patient4 = new Patient(title, desc, image, summary, avgdegree, bendcount, maxdegree);
 
@@ -161,7 +161,7 @@ public class PatientListActivity extends AppCompatActivity {
         desc = "Age: 39\n" +
                 "Condition:  Torn Achilles Tendon\n" +
                 "Rehabilitation Period : 3 years";
-        summary = "2017/12/2/";
+        summary = "Return visit twice a month";
 //        avgdegree = {27.5f, 33f, 38f, 47f, 58f, 70f, 82.5f};
         Patient patient5 = new Patient(title, desc, image, summary, avgdegree, bendcount, maxdegree);
 
@@ -170,7 +170,7 @@ public class PatientListActivity extends AppCompatActivity {
         desc = "Age: 29\n" +
                 "Condition:  Anterior cruciate ligament injury\n" +
                 "Rehabilitation Period : 5 years";
-        summary = "2017/12/2/";
+        summary = "Return visit once in two month";
 //        avgdegree = {27.5f, 33f, 38f, 47f, 58f, 70f, 82.5f};
         Patient patient6 = new Patient(title, desc, image, summary, avgdegree, bendcount, maxdegree);
 
