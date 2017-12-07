@@ -112,7 +112,7 @@ public class PatientListActivity extends AppCompatActivity {
 
     public static Patient[] getPatient(Resources resources) {
 
-        Float[] tmpcount = new Float[] {0f, 0f, 0f, 0f, 0f, 0f, 0f};
+        Float[] tmpcount = new Float[] {1f, 1f, 1f, 1f, 1f, 1f, 1f};
         Float[] tmpmax = new Float[] {0f, 0f, 0f, 0f, 0f, 0f, 0f};
 
         Float[] tmpavg = new Float[] {27.5f, 33f, 38f, 47f, 58f, 70f, 82.5f};

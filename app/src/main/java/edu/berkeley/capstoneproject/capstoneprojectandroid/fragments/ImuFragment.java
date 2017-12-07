@@ -27,6 +27,8 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import edu.berkeley.capstoneproject.capstoneprojectandroid.CapstoneProjectAndroidApplication;
 import edu.berkeley.capstoneproject.capstoneprojectandroid.R;
@@ -81,6 +83,7 @@ public class ImuFragment extends Feather52Fragment {
     private ArrayList<Float> Degree;
     private float nextDegree;
     private Patient mpatient;
+    private Timer timer;
 
     @Nullable
     @Override
@@ -190,6 +193,8 @@ public class ImuFragment extends Feather52Fragment {
         if (maxDegree > dailyMax.get(dailyMax.size() - 1)) {
             dailyMax.set(dailyMax.size() - 1, maxDegree);
         }
+        timer.cancel();
+        mdb.userDao().insert(mpatient);
         super.onDestroy();
     }
 
@@ -288,10 +293,13 @@ public class ImuFragment extends Feather52Fragment {
         if (Degree == null) {
             Degree = new ArrayList<>();
         }
-        new Thread(new Runnable() {
+
+        timer = new Timer();
+        timer.schedule(new TimerTask()
+        {
             @Override
             public void run() {
-                Log.d("Thread", "Befroe add Degree");
+                Log.d("Thread", "Before add Degree");
                 if (Degree.size() == 0 || Math.abs(Degree.get(Degree.size() - 1) - nextDegree) > tolerance) {
                     Degree.add(nextDegree);
                 }
@@ -304,7 +312,14 @@ public class ImuFragment extends Feather52Fragment {
                     }
                 }
             }
-        }).start();
+        }, 0, 1000);
+
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//            }
+//        }).start();
     }
 
     private float findLocalMax() {
