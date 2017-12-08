@@ -93,8 +93,8 @@ public class PatientListActivity extends AppCompatActivity {
 //        mdb.userDao().insertAll(plist);
 //        Patient p = new Patient("Alan", "fuck", getResources().getString(R.string.ndtv_image_url), "2018/1/1");
 //        mdb.userDao().insert(p);
-        mdb.userDao().deleteAll();
-        mdb.userDao().insertAll(getPatient(getResources()));
+//        mdb.userDao().deleteAll();
+//        mdb.userDao().insertAll(getPatient(getResources()));
         ArrayList<Patient> tmp = new ArrayList<>(mdb.userDao().getAll());
         mAdapter.setCards(tmp);
         shimmerRecycler.hideShimmerAdapter();

@@ -74,7 +74,7 @@ public class ImuFragment extends Feather52Fragment {
     };
 
     private AppDatabase mdb;
-    private final float tolerance = 0.5f;
+    private final float tolerance = 3.0f;
     private float bendCount = 0;
     private float prevDegree = 0;
     private float curDegree = 0;
@@ -155,7 +155,7 @@ public class ImuFragment extends Feather52Fragment {
                 String label = intent.getStringExtra(EXTRA_LABEL);
                 long tookAt = intent.getLongExtra(EXTRA_TOOK_AT, 0);
                 float value = intent.getFloatExtra(EXTRA_VALUE, 0);
-                Log.d("Receive Data", label + " " + value);
+//                Log.d("Receive Data", label + " " + value);
                 addDataEntry(label, new Entry(tookAt, value));
 
                 if (label.equals(IMU.LABEL_IMU_ACC_Z))
@@ -299,7 +299,6 @@ public class ImuFragment extends Feather52Fragment {
         {
             @Override
             public void run() {
-                Log.d("Thread", "Before add Degree");
                 if (Degree.size() == 0 || Math.abs(Degree.get(Degree.size() - 1) - nextDegree) > tolerance) {
                     Degree.add(nextDegree);
                 }

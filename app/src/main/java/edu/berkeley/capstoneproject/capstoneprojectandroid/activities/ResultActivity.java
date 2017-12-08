@@ -73,9 +73,12 @@ public class ResultActivity extends AppCompatActivity {
         animation.setInterpolator(new DecelerateInterpolator());
         animation.start();*/
 //        addData2Chart();
-        mAvg.setText("Today's Avg: " + String.valueOf(mpatient.getDailyAvgDegree().get(mpatient.getDailyAvgDegree().size() - 1)) + "°");
-        mMax.setText("Today's Max: " + String.valueOf(mpatient.getDailyMaxDegree().get(mpatient.getDailyMaxDegree().size() - 1)) + "°");
-        mBendCount.setText("Bend Count: " + String.valueOf(mpatient.getDailyBendCount().get(mpatient.getDailyBendCount().size() - 1)));
+        String t = "Today's Avg: " + String.valueOf(Math.round(mpatient.getDailyAvgDegree().get(mpatient.getDailyAvgDegree().size() - 1))) + "°";
+        mAvg.setText(t);
+        t = "Today's Max: " + String.valueOf(Math.round(mpatient.getDailyMaxDegree().get(mpatient.getDailyMaxDegree().size() - 1))) + "°";
+        mMax.setText(t);
+        t = "Bend Count: " + String.valueOf(Math.round(mpatient.getDailyBendCount().get(mpatient.getDailyBendCount().size() - 1)));
+        mBendCount.setText(t);
 
         new Thread(new Runnable() {
 

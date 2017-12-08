@@ -155,12 +155,12 @@ public class Feather52Service extends Service {
             broadcastData(ACTION_DATA_AVAILABLE, characteristic.getService(), characteristic, label, tookAt, value);
         }
 
-        Exercise e = mFeather52.getCurrentExercise();
-        for (String label: measurements.keySet()) {
-            Metric metric = e.getMetric(label);
-            Measurement meas = measurements.get(label);
-            MeasurementHelper.create(e, metric, meas);
-        }
+//        Exercise e = mFeather52.getCurrentExercise();
+//        for (String label: measurements.keySet()) {
+//            Metric metric = e.getMetric(label);
+//            Measurement meas = measurements.get(label);
+//            MeasurementHelper.create(e, metric, meas);
+//        }
     }
 
     private void broadcastNewState(final String action) {
