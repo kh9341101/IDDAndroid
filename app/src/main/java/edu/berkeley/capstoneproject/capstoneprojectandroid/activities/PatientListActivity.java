@@ -94,7 +94,7 @@ public class PatientListActivity extends AppCompatActivity {
 //        Patient p = new Patient("Alan", "fuck", getResources().getString(R.string.ndtv_image_url), "2018/1/1");
 //        mdb.userDao().insert(p);
 //        mdb.userDao().deleteAll();
-//        mdb.userDao().insertAll(getPatient(getResources()));
+//        mdb.userDao().insertAll(geotPatient(getResources()));
         ArrayList<Patient> tmp = new ArrayList<>(mdb.userDao().getAll());
         mAdapter.setCards(tmp);
         shimmerRecycler.hideShimmerAdapter();
@@ -112,9 +112,8 @@ public class PatientListActivity extends AppCompatActivity {
 
     public static Patient[] getPatient(Resources resources) {
 
-        Float[] tmpcount = new Float[] {1f, 1f, 1f, 1f, 1f, 1f, 1f};
-        Float[] tmpmax = new Float[] {0f, 0f, 0f, 0f, 0f, 0f, 0f};
-
+        Float[] tmpcount = new Float[] {2f, 1f, 1f, 1f, 1f, 1f, 1f};
+        Float[] tmpmax = new Float[] {30f, 33f, 38f, 47f, 58f, 70f, 82.5f};
         Float[] tmpavg = new Float[] {27.5f, 33f, 38f, 47f, 58f, 70f, 82.5f};
         ArrayList<Float> avgdegree = new ArrayList<>(Arrays.asList(tmpavg));
         ArrayList<Float> bendcount = new ArrayList<>(Arrays.asList(tmpcount));
